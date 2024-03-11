@@ -1,7 +1,7 @@
 const paymentSuccess=true;
 const mark =80;
 const enroll =(callback)=>{
-  console.log("prement Processing....")
+  console.log("Payment Processing....")
   setTimeout(()=>{
     callback()
   },2000)

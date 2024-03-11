@@ -7,7 +7,7 @@ const promise= new Promise(function(resolve, reject){
     }else{
     reject("promise not success..")
     }
-  },7000)
+  },1000)
 })
 //promise call
 promise
@@ -20,25 +20,41 @@ promise
 // callbackfunction.js problem solving 
 const paymentSuccess=true;
 const mark =80;
-const enroll =(callback)=>{
-  console.log("payment Processing....")
-  setTimeout(()=>{
-    callback()
-  },2000)
-}
-const progress =(callback)=>{
-  console.log("result compare...")
-  setTimeout(()=>{
-    if(mark >=80){
-      callback()
+const enroll =()=>{
+  const promise=new Promise(function(resolve,reject){
+    setTimeout(()=>{
+    if(paymentSuccess){
+    resolve("payment Processing successfull....");
     }else{
-      console.log("Your result fail,try again now")
+      reject("payment is not success");
     }
   },2000)
+  })
+  return promise;
+}
+
+const progress =()=>{
+  const promise= new Promise(function(resolve,reject){
+    setTimeout(()=>{
+    if(mark >=80){
+      resolve("your result successfull");
+    }else{
+      reject("Your result fail,try again now")
+    }
+  },2000)
+  })
+  return promise;
 }
 const certificate=()=>{
-  console.log("successFull Processing certificate...")
+  const promise= new Promise(function(resolve){
+    resolve("successFull Processing certificate...")
+  })
+  return promise;
 }
-enroll(()=>{
-  progress(certificate);
-});
+enroll()
+.then(value=>console.log(value))
+.then(progress)
+.then(value=>console.log(value))
+.then(certificate)
+.then(value=>console.log(value))
+.catch(err=>console.log(err))

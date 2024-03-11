@@ -1,6 +1,6 @@
 const paymentSuccess=true;
 const mark =80;
-const enrole =(callback)=>{
+const enroll =(callback)=>{
   console.log("prement Processing....")
   setTimeout(()=>{
     callback()
@@ -19,6 +19,6 @@ const progress =(callback)=>{
 const certificate=()=>{
   console.log("successFull Processing certificate...")
 }
-enrole(()=>{
+enroll(()=>{
   progress(certificate);
 });

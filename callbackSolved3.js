@@ -1,26 +1,8 @@
-const request=true;
-// promise defination
-const promise= new Promise(function(resolve, reject){
-  setTimeout(function(){
-    if(request){
-    resolve("promise success..")
-    }else{
-    reject("promise not success..")
-    }
-  },1000)
-})
-//promise call
-promise
-  .then(function(value){
-    console.log(value)
-  })
-.catch(function(err){
-  console.log(err);
-})
-// callbackfunction.js problem solving 
+// callbackfunction2.js problem solving 
 const paymentSuccess=true;
 const mark =80;
 const enroll =()=>{
+  console.log('cours enrollment is processing.. ')
   const promise=new Promise(function(resolve,reject){
     setTimeout(()=>{
     if(paymentSuccess){
@@ -28,12 +10,13 @@ const enroll =()=>{
     }else{
       reject("payment is not success");
     }
-  },0)
+  },2000)
   })
   return promise;
 }
 
 const progress =()=>{
+  console.log('Exam result is cheacking...')
   const promise= new Promise(function(resolve,reject){
     setTimeout(()=>{
     if(mark >=80){
@@ -41,7 +24,7 @@ const progress =()=>{
     }else{
       reject("Your result fail,try again now")
     }
-  },0)
+  },2000)
   })
   return promise;
 }
@@ -51,10 +34,14 @@ const certificate=()=>{
   })
   return promise;
 }
-enroll()
-.then(value=>console.log(value))
-.then(progress)
-.then(value=>console.log(value))
-.then(certificate)
-.then(value=>console.log(value))
-.catch(err=>console.log(err))
+const callFunction=async()=>{
+  try{
+    await enroll()
+  await progress()
+  const data=await certificate()
+  console.log(data);
+  }catch(err){
+    console.log(err)
+  }
+}
+callFunction();
